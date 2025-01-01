@@ -55,3 +55,24 @@ def save_html(html_content, filename="output.html"):
     with open(path, "w", encoding="utf-8") as file:
         file.write(html_content)
     print(f"HTML saved to {path}")
+
+import pandas as pd
+
+def save_to_excel(data, filename="output.xlsx"):
+    """
+    Saves the data to an Excel file.
+    """
+    # 데이터프레임 생성
+    df = pd.DataFrame(data)
+
+    # 데이터가 비어 있는지 확인
+    if df.empty:
+        print("No data to save.")
+        return
+
+    # 엑셀 파일 저장
+    try:
+        df.to_excel(filename, index=False)
+        print(f"Data saved to {filename}")
+    except Exception as e:
+        print(f"Error while saving to Excel: {e}")

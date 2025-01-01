@@ -1,4 +1,4 @@
-from crawler import fetch_html, parse_html, save_html
+from crawler import fetch_html, parse_html, save_html, save_to_excel
 
 if __name__ == "__main__":
     url = "https://www.miumiu.com/kr/ko/bags/c/10268KR"
@@ -22,5 +22,6 @@ if __name__ == "__main__":
         else:
             print("No products found.")
 
+        save_to_excel(product_data)
     except Exception as e:
         print(f"An error occurred: {e}")
