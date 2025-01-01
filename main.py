@@ -13,12 +13,12 @@ if __name__ == "__main__":
 
         # HTML 데이터 파싱
         print("Parsing HTML content...")
-        product_data = parse_html(html_content)
+        product_data = parse_html(html_content,base_url=url)
 
         # 결과 출력
         if product_data:
             for idx, product in enumerate(product_data, start=1):
-                print(f"{idx}. {product['Product Name']} - {product['Price']} - {product['Link']}")
+                print(f"{idx}. {product['상품명']} - {product['가격']} - {product['상품 링크 URL']}")
         else:
             print("No products found.")
 

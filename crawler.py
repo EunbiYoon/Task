@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+from urllib.parse import urljoin
 
 def fetch_html(url):
     """
@@ -14,7 +15,7 @@ def fetch_html(url):
     return response.text
 
 
-def parse_html(html_content):
+def parse_html(html_content, base_url):
     """
     Parses HTML content and extracts relevant data.
     """
@@ -32,12 +33,15 @@ def parse_html(html_content):
             # 가격 추출
             price = card.find("p", class_="card__price").get_text(strip=True)
 
-            # 링크 추출
-            link = card.find("a", href=True)["href"]
+            # 링크 (상대 경로 -> 절대 경로 변환)
+            relative_link = card.find("a", href=True)["href"]
+            link = urljoin(base_url, relative_link)
+
+
             product_data.append({
-                "Product Name": title,
-                "Price": price,
-                "Link": f"https://www.miumiu.com{link}"
+                "상품명": title,
+                "가격": price,
+                "상품 링크 URL": link
             })
         except AttributeError:
             # 일부 데이터가 없는 경우 예외 처리
