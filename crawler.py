@@ -36,20 +36,19 @@ def parse_html(html_content, base_url):
 
             # 상품 링크 (상대 경로 -> 절대 경로 변환)
             relative_link = card.find("a", href=True)["href"]
-            product_link = urljoin(base_url, relative_link)
+            product_url = urljoin(base_url, relative_link)
 
             # 가격 추출
             # srcset 속성에서 첫 번째 URL 추출
             # 이미지 태그 찾기
-            img_tag = card.find("source").get("data-srcset")
-            first_url = img_tag.split(",")[0].strip()
-            print(first_url)
+            image_tag = card.find("source").get("data-srcset")
+            image_url = image_tag.split(",")[0].strip()
 
             product_data.append({
                 "상품명": title,
                 "가격": price,
-                "상품 링크 URL": product_link,
-                "이미지 URL":first_url
+                "상품 링크 URL": product_url,
+                "이미지 URL":image_url
             })
         except AttributeError:
             # 일부 데이터가 없는 경우 예외 처리
