@@ -18,7 +18,7 @@ if __name__ == "__main__":
         # 결과 출력
         if product_data:
             for idx, product in enumerate(product_data, start=1):
-                print(f"{idx}. {product['상품명']} - {product['가격']} - {product['상품 링크 URL']}")
+                print(f"{idx}. {product['상품명']} - {product['가격']} - {product['상품 링크 URL']} - {product['이미지 URL']}")
         else:
             print("No products found.")
 

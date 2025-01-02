@@ -1,0 +1,113 @@
+[
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "urljoin",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_html",
+        "importPath": "crawler",
+        "description": "crawler",
+        "isExtraImport": true,
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "parse_html",
+        "importPath": "crawler",
+        "description": "crawler",
+        "isExtraImport": true,
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "save_html",
+        "importPath": "crawler",
+        "description": "crawler",
+        "isExtraImport": true,
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "save_to_excel",
+        "importPath": "crawler",
+        "description": "crawler",
+        "isExtraImport": true,
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_html",
+        "kind": 2,
+        "importPath": "crawler",
+        "description": "crawler",
+        "peekOfCode": "def fetch_html(url):\n    \"\"\"\n    Fetches HTML content from the URL.\n    \"\"\"\n    headers = {\n        \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\"\n    }\n    response = requests.get(url, headers=headers)\n    response.raise_for_status()  # HTTP 에러 발생 시 예외 처리\n    return response.text",
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "parse_html",
+        "kind": 2,
+        "importPath": "crawler",
+        "description": "crawler",
+        "peekOfCode": "def parse_html(html_content, base_url):\n    \"\"\"\n    Parses HTML content and extracts relevant data.\n    \"\"\"\n    soup = BeautifulSoup(html_content, \"html.parser\")\n    # 필요한 데이터 추출 (예: 상품명과 가격)\n    product_data = []\n    product_cards = soup.find_all(\"article\", class_=\"card\")\n    for card in product_cards:\n        try:",
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "save_html",
+        "kind": 2,
+        "importPath": "crawler",
+        "description": "crawler",
+        "peekOfCode": "def save_html(html_content, filename=\"output.html\"):\n    \"\"\"\n    Saves raw HTML content to a file for debugging.\n    \"\"\"\n    os.makedirs(\"output\", exist_ok=True)\n    path = os.path.join(\"output\", filename)\n    with open(path, \"w\", encoding=\"utf-8\") as file:\n        file.write(html_content)\n    print(f\"HTML saved to {path}\")\ndef save_to_excel(data, filename=\"output.xlsx\"):",
+        "detail": "crawler",
+        "documentation": {}
+    },
+    {
+        "label": "save_to_excel",
+        "kind": 2,
+        "importPath": "crawler",
+        "description": "crawler",
+        "peekOfCode": "def save_to_excel(data, filename=\"output.xlsx\"):\n    \"\"\"\n    Saves the data to an Excel file.\n    \"\"\"\n    # 데이터프레임 생성\n    df = pd.DataFrame(data)\n    # 데이터가 비어 있는지 확인\n    if df.empty:\n        print(\"No data to save.\")\n        return",
+        "detail": "crawler",
+        "documentation": {}
+    }
+]

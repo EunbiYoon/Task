@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import os
 from urllib.parse import urljoin
+import pandas as pd
 
 def fetch_html(url):
     """
@@ -33,15 +34,22 @@ def parse_html(html_content, base_url):
             # 가격 추출
             price = card.find("p", class_="card__price").get_text(strip=True)
 
-            # 링크 (상대 경로 -> 절대 경로 변환)
+            # 상품 링크 (상대 경로 -> 절대 경로 변환)
             relative_link = card.find("a", href=True)["href"]
-            link = urljoin(base_url, relative_link)
+            product_link = urljoin(base_url, relative_link)
 
+            # 가격 추출
+            # srcset 속성에서 첫 번째 URL 추출
+            # 이미지 태그 찾기
+            img_tag = card.find("source").get("data-srcset")
+            first_url = img_tag.split(",")[0].strip()
+            print(first_url)
 
             product_data.append({
                 "상품명": title,
                 "가격": price,
-                "상품 링크 URL": link
+                "상품 링크 URL": product_link,
+                "이미지 URL":first_url
             })
         except AttributeError:
             # 일부 데이터가 없는 경우 예외 처리
@@ -59,8 +67,6 @@ def save_html(html_content, filename="output.html"):
     with open(path, "w", encoding="utf-8") as file:
         file.write(html_content)
     print(f"HTML saved to {path}")
-
-import pandas as pd
 
 def save_to_excel(data, filename="output.xlsx"):
     """
